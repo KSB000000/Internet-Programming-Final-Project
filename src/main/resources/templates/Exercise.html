@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>강신범의 프로젝트
+    </title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/Exercise.css}" rel="stylesheet" />
+    <script th:src="@{/js/Exercise.js}" defer></script>
+    <style>
+                .navbar-collapse {
+            justify-content: flex-end;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+        
+        @media (max-width: 992px) {
+            .navbar-collapse {
+                justify-content: flex-end;
+            }
+
+            .navbar-nav {
+                text-align: right;
+                width: 100%;
+            }
+            .navbar-toggler {
+                margin-left: auto;
+                order: 1;
+            }
+            .navbar-collapse.show {
+                padding-right: 15px; /* 메뉴가 열렸을 때 간격 조정 */
+            }
+        }
+    </style>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function toggleNavbar() {
+        var navbarNav = document.getElementById('navbarNav');
+        if (navbarNav.classList.contains('show')) {
+            navbarNav.classList.remove('show');
+        } else {
+            navbarNav.classList.add('show');
+        }}
+        /*]]>*/
+    </script>
+</head>
+
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container px-5">
+            <a class="navbar-brand" href="/exercise">강신범의 생활</a>
+            <button class="navbar-toggler" type="button" onclick="toggleNavbar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                    <li class="nav-item" th:if="${session.user == null}">
+                        <a class="nav-link" id="login-link" th:href="@{/login}">로그인</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.user != null}">
+                        <a class="nav-link" th:href="@{/logout}">로그아웃</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Content-->
+    <div class="row gx-4 gx-lg-5">
+        <div class="main-wrapper">
+            <div class="main-content">
+                <div class="section section1" onclick="openForm('form1')">
+                    <div class="overlay-text">초심자</div>
+                    <div class="overlay"></div>
+                </div>
+                <div class="section section2" onclick="openForm('form2')">
+                    <div class="overlay-text">중급자</div>
+                    <div class="overlay"></div>
+                </div>
+                <div class="section section3" onclick="openForm('form3')">
+                    <div class="overlay-text">상급자</div>
+                    <div class="overlay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Form 1 -->
+    <div id="form1" class="form-popup">
+        <div class="form-container">
+            <div class="form-left">
+                <p for="partSelect1">부위를 선택하세요:</p>
+                <form id="contentForm1">
+                    <div class="form-group form-inline">
+                        <select class="form-control" id="partSelect1">
+                            <option value="">선택</option>
+                            <option value="back">등</option>
+                            <option value="chest">가슴</option>
+                            <option value="shoulder">어깨</option>
+                            <option value="leg">하체</option>
+                            <option value="biceps">이두</option>
+                            <option value="triceps">삼두</option>
+                        </select>
+                    </div>
+                    <div id="optionsContainer1"></div>
+                </form>
+                <div id="output1"></div>
+            </div>
+            <div class="form-right">
+                <h3>관련 영상보기</h3>
+                <p>운동 이름을 클릭하면 관련된 영상이 나타납니다.</p>
+            </div>
+        </div>
+        <button type="button" class="close-btn" onclick="closeForm('form1')">&times;</button>
+    </div>
+
+    <!-- Form 2 -->
+    <div id="form2" class="form-popup">
+        <div class="form-container">
+            <div class="form-left">
+                <p for="partSelect2">부위를 선택하세요:</p>
+                <form id="contentForm2">
+                    <div class="form-group form-inline">
+                        <select class="form-control" id="partSelect2">
+                            <option value="">선택</option>
+                            <option value="back">등</option>
+                            <option value="chest">가슴</option>
+                            <option value="shoulder">어깨</option>
+                            <option value="leg">하체</option>
+                            <option value="biceps">이두</option>
+                            <option value="triceps">삼두</option>
+                        </select>
+                    </div>
+                    <div id="optionsContainer2"></div>
+                </form>
+                <div id="output2"></div>
+            </div>
+            <div class="form-right">
+                <h3>관련 영상보기</h3>
+                <p>운동 이름을 클릭하면 관련된 영상이 나타납니다.</p>
+            </div>
+        </div>
+        <button type="button" class="close-btn" onclick="closeForm('form2')">&times;</button>
+    </div>
+
+    <!-- Form 3 -->
+    <div id="form3" class="form-popup">
+        <div class="form-container">
+            <div class="form-left">
+                <p for="partSelect3">부위를 선택하세요:</p>
+                <form id="contentForm3">
+                    <div class="form-group form-inline">
+                        <select class="form-control" id="partSelect3">
+                            <option value="">선택</option>
+                            <option value="back">등</option>
+                            <option value="chest">가슴</option>
+                            <option value="shoulder">어깨</option>
+                            <option value="leg">하체</option>
+                            <option value="biceps">이두</option>
+                            <option value="triceps">삼두</option>
+                        </select>
+                    </div>
+                    <div id="optionsContainer3"></div>
+                </form>
+                <div id="output3"></div>
+            </div>
+            <div class="form-right">
+                <h3>관련 영상보기</h3>
+                <p>운동 이름을 클릭하면 관련된 영상이 나타납니다.</p>
+            </div>
+        </div>
+        <button type="button" class="close-btn" onclick="closeForm('form3')">&times;</button>
+    </div>
+
+
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container px-4 px-lg-5">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+</body>
+
+</html>

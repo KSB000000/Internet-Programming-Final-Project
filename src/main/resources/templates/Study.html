@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>강신범의 프로젝트</title>
+    <link rel="stylesheet" th:href="@{/css/Study.css}">
+    <script th:src="@{/js/Study.js}" defer></script>
+    <style>
+        #todoList li.complete .delete-button::after {
+            content: none;
+        }
+        @media (max-width: 992px) {
+  .row.gx-4.gx-lg-5.align-items-center.my-5 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .col-lg-5,
+  .col-lg-7 {
+    width: 100%;
+  }
+
+  .quote-container {
+    margin-left: 0; 
+    margin-top: 20px;
+  }
+  
+}
+.navbar-collapse {
+            justify-content: flex-end;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+        
+        @media (max-width: 992px) {
+            .navbar-collapse {
+                justify-content: flex-end;
+            }
+
+            .navbar-nav {
+                text-align: right;
+                width: 100%;
+            }
+            .navbar-toggler {
+                margin-left: auto;
+                order: 1;
+            }
+            .navbar-collapse.show {
+                padding-right: 15px;
+            }
+        }
+    </style>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function toggleNavbar() {
+        var navbarNav = document.getElementById('navbarNav');
+        if (navbarNav.classList.contains('show')) {
+            navbarNav.classList.remove('show');
+        } else {
+            navbarNav.classList.add('show');
+        }}
+        /*]]>*/
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container px-5">
+            <a class="navbar-brand" href="/study">강신범의 생활</a>
+            <button class="navbar-toggler" type="button" onclick="toggleNavbar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                    <li class="nav-item" th:if="${session.user == null}">
+                        <a class="nav-link" id="login-link" th:href="@{/login}">로그인</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.user != null}">
+                        <a class="nav-link" th:href="@{/logout}">로그아웃</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container px-4 px-lg-5">
+        <div class="pt"></div>
+        <div class="row gx-4 gx-lg-5 align-items-center my-5">
+            <div class="col-lg-5">
+
+                <div class="todo-container">
+                    <div id="inputField">
+                        <input type="text" id="todoInput" placeholder="할 일 추가하기" onkeydown="keyCodeCheck(event)">
+                        <button type="button" id="addBtn" onclick="createTodo()">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="todoList-wrapper">
+                    <div class="todoList-container">
+                        <ul id="todoList">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div id="quoteText" class="quote-container">
+
+                    <div id="completionRate">목표 달성율 : 0.00%</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="py-5 bg-dark">
+        <div class="container px-4 px-lg-5">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
+        </div>
+    </footer>
+</body>
+
+</html>

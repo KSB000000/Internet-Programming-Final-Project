@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>강신범의 프로젝트
+    </title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/Food.css}" rel="stylesheet" />
+    <script th:src="@{/js/Food.js}" defer></script>
+    <style>
+                .navbar-collapse {
+            justify-content: flex-end;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+        
+        @media (max-width: 992px) {
+            .navbar-collapse {
+                justify-content: flex-end;
+            }
+
+            .navbar-nav {
+                text-align: right;
+                width: 100%;
+            }
+            .navbar-toggler {
+                margin-left: auto;
+                order: 1;
+            }
+            .navbar-collapse.show {
+                padding-right: 15px; /* 메뉴가 열렸을 때 간격 조정 */
+            }
+        }
+    </style>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function toggleNavbar() {
+        var navbarNav = document.getElementById('navbarNav');
+        if (navbarNav.classList.contains('show')) {
+            navbarNav.classList.remove('show');
+        } else {
+            navbarNav.classList.add('show');
+        }}
+        /*]]>*/
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container px-5">
+            <a class="navbar-brand" href="/food">강신범의 생활</a>
+            <button class="navbar-toggler" type="button" onclick="toggleNavbar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                    <li class="nav-item" th:if="${session.user == null}">
+                        <a class="nav-link" id="login-link" th:href="@{/login}">로그인</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.user != null}">
+                        <a class="nav-link" th:href="@{/logout}">로그아웃</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Content-->
+    <div class="row gx-4 gx-lg-5">
+        <div class="main-wrapper">
+            <div class="main-content">
+                <div class="section section1" onclick="openForm('form1')">
+                    <div class="overlay-text">메뉴 추천 받기</div>
+                    <div class="overlay"></div>
+                </div>
+                <div class="section section2" onclick="openForm('form2')">
+                    <div class="overlay-text">인하대 근처 식당 <br>검색하기</div>
+                    <div class="overlay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Food Recommendation Form -->
+    <div id="form1" class="form-popup">
+        <form class="form-container" id="recommendationForm">
+            <span class="close" onclick="closeForm('form1')">&times;</span>
+            <h2>음식 추천 받기</h2>
+            <select class="form-control" id="cuisine" name="cuisine">
+                <option value="">선택</option>
+                <option value="korean">한식</option>
+                <option value="chinese">중식</option>
+                <option value="japanese">일식</option>
+                <option value="western">양식</option>
+            </select>
+            <button type="submit" class="btn">Submit</button>
+            <div id="foodRecommendation">
+                <img id="randomFoodImage" src="" alt="" style="max-width: 300px;"/>
+                <div id="foodNameContainer">
+                    <p id="randomFoodName" class="food-name"></p>
+                </div>
+            </div>
+    
+        </form>
+        
+    </div>
+        
+    </div>
+    <!-- Restaurant Search Form -->
+    <div id="form2" class="form-popup">
+        <form class="form-container" id="restaurantSearchForm">
+            <span class="close" onclick="closeForm('form2')">&times;</span>
+            <h2>음식점 검색</h2>
+            <input type="text" id="menu-input" class="form-control" placeholder="메뉴를 입력하세요." required />
+            <button type="submit" class="btn">검색하기</button>
+        </form>
+        <div class="map-container">
+            <div id="map"></div>
+            <div id="results"></div> <!-- 검색 결과를 표시할 새로운 요소 -->
+        </div>
+    </div>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container px-4 px-lg-5">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAS36-3C0roZP6bDaMAEsn8gF5rJpx3qwY&libraries=places&callback=initMap"></script>
+
+</body>
+
+</html>
